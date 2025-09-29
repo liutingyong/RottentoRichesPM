@@ -1,0 +1,20 @@
+# Example URLs for Webscraping Tutorial
+# Lines starting with # are comments and will be ignored
+# One URL per line
+
+# News and Articles
+https://www.slashfilm.com/1974280/black-phone-2-review/
+https://www.bbc.com/news/technology
+https://www.reuters.com/business/
+
+# Educational Content
+https://docs.python.org/3/tutorial/
+https://realpython.com/python-web-scraping-practical-introduction/
+
+# E-commerce (be respectful with scraping)
+https://httpbin.org/html
+https://httpbin.org/json
+
+# Test URLs (safe for learning)
+https://example.com
+https://httpbin.org/status/200
