@@ -7,11 +7,11 @@ from pathlib import Path
 #should we discard some stopwords?
 
 #punkt is a pretrained sentence/word tokenizer, splits better (knows abbreviations, punctuation, etc.)
-#nltk.download('punkt')
+nltk.download('punkt_tab')
 #stopwords are irrelevant words that don't contribute to meaning but important for grammar like i, me, the, etc.
-#nltk.download('stopwords')
+nltk.download('stopwords')
 #synonym/antonym 
-#nltk.download('wordnet') #wordnet is lexical database for english
+nltk.download('wordnet') #wordnet is lexical database for english
 
 def preprocess_text(text):
     # Tokenize the text into words
@@ -26,8 +26,13 @@ def preprocess_text(text):
     tokens = [t for t in tokens if t not in stop_words]
     
     # Lemmatize the words (aka converting word to base def)
-    lemmatizer = WordNetLemmatizer()
-    tokens = [lemmatizer.lemmatize(t) for t in tokens]
+    ###########TODO: Lemmatize the words (aka converting word to base def)###########
+    #need to create an instance of WordNetLemmatizer
+    #then use the lemmatizer to lemmatize the words by applying it like a function
+    #reminder, yourLematizerObject.lemmatize(arguments)
+    #structure above shows how to use list comprehension to do actions on each item in the list
+    #tokens = [action for item in list]
+
     
     #return ' '.join(tokens)
     return tokens
@@ -47,7 +52,7 @@ def extract_features(words):
     return {word: True for word in words}
 
 from nltk.corpus import movie_reviews
-#nltk.download('movie_reviews')
+nltk.download('movie_reviews')
 import random
 
 #categories are positiev or negative
@@ -68,16 +73,15 @@ for (words, label) in docs:
         print(f"Error processing {words}: {e}")
 #featuresets = [(extract_features(preprocess_text(words)), label) for (words, label) in docs]
 #do we split in half or just split by first 1500 and rest?
-training_set = featuresets[:1500]
-testing_set = featuresets[1500:]
+  ###########TODO: split the featuresets into training and testing sets###########
+#training_set = 
+#testing_set = 
 
 #naivebayesclassifier, supervised ML (learns from labeled data)
 #bayes theorem for probability calcs
 #naive bc assumes independence between features
 #counts how often each word appears in each category (pos, neg)
 from nltk import NaiveBayesClassifier
-print(f'# of training examples: {len(training_set)}')
-print(f'# of featuresets: {len(featuresets)}')
 classifier = NaiveBayesClassifier.train(training_set)
 #test accuracy
 print(f"Classifier accuracy: {nltk.classify.accuracy(classifier, testing_set)}")
@@ -87,23 +91,23 @@ classifications = []
 for filename in directory.glob("*.txt"):
     with open(filename, "r", encoding="utf-8") as file:
         text = file.read()
-        print(f"Classifying file: {filename.name}")
-        features = extract_features(preprocess_text(text))
-        label = classifier.classify(features)
-        if label == 'pos':
-            classifications.append(1)
-        else:
-            classifications.append(0)
+            ###########TODO: Classify the sentiment of the text###########
+    #must preprocess the text first, then extract features from the preprocessed text
+    #then use .classify(input) to classify the sentiment of the text
+    #then append the classification to the classifications list (1 for 'pos', 0 for 'neg')
+    
         print(f"Sentiment for {filename.name}: {label}")
 
 #we can improve accuracy by using more data, better preprocessing, or more advanced models
 
-#change our current data to be more relevant to our use case so we can make actual bets
+# TODO: Calculate overall sentiment and make betting recommendation
 if len(classifications) == 0:
     print("No files were successfully processed. Check if the scraped_data directory exists and contains .txt files.")
 else:
+    # TODO: Calculate percentage of positive sentiment
     percentage_pos = classifications.count(1) / len(classifications)
     print(f"Percentage of positive sentiment: {percentage_pos:.2%}")
+    # TODO: Determine overall sentiment based on percentage
     if percentage_pos > 0.6:
         print("Overall Sentiment: Positive")
     elif percentage_pos < 0.4:
