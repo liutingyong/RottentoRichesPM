@@ -1,0 +1,7 @@
+DEMO_KEYID=c131db94-e40b-4f8a-9534-edfd9cc33dca
+DEMO_KEYFILE=KalshiDemoAPI.pem
+
+PROD_KEYID=72192223-a094-49fd-aff6-bf1d720b901a
+PROD_KEYFILE=KalshiProdAPI.pem
+KALSHI_URL=https://kalshi.com/markets/kxrttronares/tron-ares-rotten-tomatoes-score/kxrttronares
+#use a ticker
