@@ -79,6 +79,9 @@ async def process_multiple_urls(browser, urls, take_screenshot=False):
     You need to call process_single_url for each URL
     """
     # TODO: Loop through urls and call process_single_url for each
+    for x in urls:
+        await process_single_url(browser, x, take_screenshot)
+
 
 
 # =============================================================================
@@ -89,7 +92,7 @@ async def run(playwright, urls, take_screenshot=False):
     """
     Main run function - based on webscrape.py
     """
-    browser = await playwright.chromium.launch(headless=True, channel="chrome")
+    browser = await playwright.webkit.launch(headless=True)
     
     # TODO: Call your process_multiple_urls function here
     
@@ -106,6 +109,11 @@ def read_urls_from_file(file_path):
     Hint: Open file, read lines, strip whitespace, filter out comments and empty lines
     """
     urls = []
+    with open(file_path, 'r') as f:
+        for line in f:
+            url = line.strip()
+            if not url.startswith('#') and url.startswith('http'):
+                urls.append(url)
     # TODO: Open file and read URLs
     
     return urls
