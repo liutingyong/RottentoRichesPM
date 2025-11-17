@@ -8,7 +8,7 @@ Only basic async knowledge needed - most systems are set up for you.
 Complete in ~15 minutes.
 """
 
-import sys 
+import sys
 import asyncio
 from playwright.async_api import async_playwright
 import re
@@ -18,10 +18,12 @@ from pathlib import Path
 # HELPER FUNCTIONS (already complete - from webscrape.py)
 # =============================================================================
 
+
 def create_safe_filename(title):
     safe_title = re.sub(r"[^\w\s-]", "", title).strip().replace(" ", "_")
     safe_title = safe_title[:100] or "untitled"
     return save_directory / f"{safe_title}.txt"
+
 
 save_directory = Path(__file__).parent / "scraped_data"
 save_directory.mkdir(parents=True, exist_ok=True)
@@ -30,11 +32,13 @@ save_directory.mkdir(parents=True, exist_ok=True)
 # ASYNC VERSION OF WEBSCRAPE.PY FUNCTIONS
 # =============================================================================
 
+
 async def capture_screenshot(page):
     title = await page.title()
     filename = create_safe_filename(title).with_suffix(".png")
     await page.screenshot(path=filename, full_page=True)
     print(f"Screenshot saved as {filename}")
+
 
 async def save_page_text(page, selector, url):
     title = await page.title()
@@ -54,6 +58,7 @@ async def save_page_text(page, selector, url):
 # SINGLE URL PROCESSING (like webscrape.py run function)
 # =============================================================================
 
+
 async def process_single_url(browser, url, take_screenshot=False):
     """
     Process a single URL - based on webscrape.py run function
@@ -72,6 +77,7 @@ async def process_single_url(browser, url, take_screenshot=False):
 # MULTIPLE URL PROCESSING (what you need to implement)
 # =============================================================================
 
+
 async def process_multiple_urls(browser, urls, take_screenshot=False):
     """
     TODO: Process multiple URLs using async
@@ -79,6 +85,8 @@ async def process_multiple_urls(browser, urls, take_screenshot=False):
     You need to call process_single_url for each URL
     """
     # TODO: Loop through urls and call process_single_url for each
+    for url in urls:
+        await process_single_url(browser, url, take_screenshot)
 
 
 # =============================================================================
@@ -90,15 +98,16 @@ async def run(playwright, urls, take_screenshot=False):
     Main run function - based on webscrape.py
     """
     browser = await playwright.chromium.launch(headless=True, channel="chrome")
-    
+
     # TODO: Call your process_multiple_urls function here
-    
-    
+    await process_multiple_urls(browser, urls, take_screenshot)
+
     await browser.close()
 
 # =============================================================================
 # FILE READING (simple implementation)
 # =============================================================================
+
 
 def read_urls_from_file(file_path):
     """
@@ -106,13 +115,19 @@ def read_urls_from_file(file_path):
     Hint: Open file, read lines, strip whitespace, filter out comments and empty lines
     """
     urls = []
-    # TODO: Open file and read URLs
-    
+    # TODO: Open file  read URLs
+    with open(file_path, 'r') as f:
+        for line in f:
+            url = line.strip()
+            if url.startswith("http"):
+                urls.append(url)
+
     return urls
 
 # =============================================================================
 # MAIN FUNCTION (like webscrape.py)
 # =============================================================================
+
 
 async def main(urls, take_screenshot):
     async with async_playwright() as playwright:

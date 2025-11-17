@@ -31,7 +31,8 @@ def preprocess_text(text):
     #then use the lemmatizer to lemmatize the words by applying it like a function
     #reminder, yourLematizerObject.lemmatize(arguments)
     #structure above shows how to use list comprehension to do actions on each item in the list
-    #tokens = [action for item in list]
+    lem = WordNetLemmatizer()
+    tokens = [lem.lemmatize(item) for item in tokens]
 
     
     #return ' '.join(tokens)
@@ -74,8 +75,8 @@ for (words, label) in docs:
 #featuresets = [(extract_features(preprocess_text(words)), label) for (words, label) in docs]
 #do we split in half or just split by first 1500 and rest?
   ###########TODO: split the featuresets into training and testing sets###########
-#training_set = 
-#testing_set = 
+training_set = featuresets[:int(len(featuresets) * 0.7)]
+testing_set = featuresets[int(len(featuresets) * 0.7):]
 
 #naivebayesclassifier, supervised ML (learns from labeled data)
 #bayes theorem for probability calcs
@@ -95,8 +96,15 @@ for filename in directory.glob("*.txt"):
     #must preprocess the text first, then extract features from the preprocessed text
     #then use .classify(input) to classify the sentiment of the text
     #then append the classification to the classifications list (1 for 'pos', 0 for 'neg')
-    
-        print(f"Sentiment for {filename.name}: {label}")
+        text = preprocess_text(text)
+        text = extract_features(text)
+        poo = classifier.classify(text)
+        for pee in poo:
+            if pee == 'pos':
+                classifications.append(1)
+            else:
+                classifications.append(0)
+        #print(f"Sentiment for {filename.name}: {label}")
 
 #we can improve accuracy by using more data, better preprocessing, or more advanced models
 

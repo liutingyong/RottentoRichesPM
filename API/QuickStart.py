@@ -21,3 +21,17 @@ client = KalshiClient(config)
 # Make API calls
 balance = client.get_balance()
 print(f"Balance: ${balance.balance / 100:.2f}")
+
+series_ticker = "KXRTZOOTOPIA2"
+events_response = client.get_events(series_ticker=series_ticker)
+
+for event in events_response.events:
+    markets_response = client.get_markets(event_ticker=event.event_ticker, status='open', limit=100)
+    
+    markets = markets_response.markets
+    
+    for market in markets:
+        yes_ask = market.yes_ask if market.yes_ask else 0
+        no_ask = market.no_ask if market.no_ask else 0
+        
+        print(f"{market.ticker}: YES={yes_ask}¢ NO={no_ask}¢")
