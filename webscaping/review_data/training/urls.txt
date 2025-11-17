@@ -1,0 +1,20 @@
+# Training Review URLs
+# Add URLs of reviews you want to use for TRAINING the model
+# These should be reviews where you know the sentiment (positive/negative)
+# One URL per line, lines starting with # are ignored
+
+# Add your training review URLs below:
+
+1
+https://www.empireonline.com/movies/reviews/avatar-the-way-of-water/
+https://nypost.com/2022/12/13/avatar-the-way-of-water-review-the-sequel-weve-been-waiting-for/
+https://www.avclub.com/avatar-the-way-of-water-film-review-james-cameron-1849882442
+https://www.reelviews.net/reelviews/avatar-the-way-of-water
+https://ew.com/movies/movie-reviews/avatar-the-way-of-water-review-james-cameron/
+
+0
+https://datebook.sfchronicle.com/movies-tv/review-james-camerons-ego-turns-avatar-the-way-of-water-into-endless-torture
+https://www.telegraph.co.uk/films/0/avatar-way-water-review-james-camerons-sequel-like-waterboarded/
+https://www.newyorker.com/culture/the-front-row/avatar-the-way-of-water-reviewed-an-island-fit-for-the-king-of-the-world
+https://www.theguardian.com/film/2022/dec/18/avatar-the-way-of-water-james-cameron-3d-sequel-review-damp-squib-return-to-pandora
+https://www.irishtimes.com/culture/film/review/2022/12/14/avatar-the-way-of-water-a-very-long-and-painful-trip-to-a-blue-blue-world/
