@@ -17,13 +17,13 @@ from pathlib import Path
 # Get path relative to script location (works from any directory)
 #directory = Path("src/webscraping/review_data/training/scraped_data")
 script_dir = Path(__file__).parent
-project_root = script_dir.parent.parent  # Go up from scikit_ensemble -> src -> project root
-directory = project_root / "src" / "webscraping" / "review_data" / "training" / "scraped_data"
+project_root = script_dir.parent  # Go up from scikit_ensemble -> src -> project root
+directory = project_root / "webscaping" / "review_data" / "training" / "scraped_data"
 
 text_paths = glob.glob(str(directory / "*.txt"))
 text_files = [Path(text).stem for text in text_paths]
 
-y = [1, 1, 1, 1, 1, 0, 0,0,0,0] #defo need more data
+y = [1, 1, 1, 1, 0, 0,0,0,0] #defo need more data
 
 X_train, X_test, Y_train, Y_test = train_test_split(text_paths, y, test_size=0.5, random_state=42, stratify=y)
 
