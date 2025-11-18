@@ -81,10 +81,11 @@ for (words, label) in docs:
 #bayes theorem for probability calcs
 #naive bc assumes independence between features
 #counts how often each word appears in each category (pos, neg)
-from nltk import NaiveBayesClassifier
-classifier = NaiveBayesClassifier.train(training_set)
-#test accuracy
-print(f"Classifier accuracy: {nltk.classify.accuracy(classifier, testing_set)}")
+# BROKEN TUTORIAL CODE - COMMENTED OUT
+# from nltk import NaiveBayesClassifier
+# classifier = NaiveBayesClassifier.train(training_set)
+# #test accuracy
+# print(f"Classifier accuracy: {nltk.classify.accuracy(classifier, testing_set)}")
 
 
 classifications = []
